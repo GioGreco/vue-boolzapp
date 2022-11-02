@@ -211,7 +211,7 @@ const app = createApp({
             return `background-image: url(.${this.contacts[this.activeContact - 1].avatar})`
         },
         getContactName(){
-            return this.contacts[this.activeContact].name;
+            return this.contacts[this.activeContact - 1].name;
         }
     },
     mounted(){
