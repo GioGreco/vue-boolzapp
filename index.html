@@ -15,8 +15,74 @@
 
     <div id="app" class="h-100 w-100">
         <div class="bg-wrapper h-100 w-100 d-flex justify-content-center align-items-center">
-            <div id="main-window" class="bg-black">
-
+            <div id="main-window" class="bg-black row g-0">
+                <div class="left-window col-4 h-100">
+                    <div class="section-header my-profile d-flex justify-content-between align-items-center">
+                        <div class="my-pic"></div>
+                        <div class="my-profile-icons d-flex justify-content-between fs-5">
+                            <i class="fa-solid fa-circle-notch"></i>
+                            <i class="fa-solid fa-message"></i>
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </div>
+                    </div>
+                    <div class="notify-panel d-flex justify-content-start align-items-center">
+                        <div class="notification-icon">
+                            <i class="fa-solid fa-bell-slash"></i>
+                        </div>
+                        <div>
+                            <p class="m-0 fw-bolder">Ricevi notifiche di nuovi messaggi</p>
+                            <span class="text-decoration-underline">Attiva notifiche desktop</span>
+                        </div>
+                    </div>
+                    <div class="search-chats d-flex justify-content-center align-items-center">
+                        <input type="text">
+                    </div>
+                    <transition-group name="chatsFX" tag="ul" class="chats p-0">
+                        <li @click="activeContact = item.id" v-for="(item, index) in contacts" :key="item.id" :class="(activeContact == item.id)? 'active' : '' " class="contact d-flex justify-content-between align-items-center">
+                            <div class="contact-pic">
+                                <img :src="item.avatar" :alt='item.name' class="h-100 w-100">
+                            </div>
+                            <div class="contact-preview">
+                                <p class="contact-name fw-bolder m-0">
+                                    {{item.name}}
+                                </p>
+                                <span class="last-message gg-fs-smaller">
+                                    {{item.messages[item.messages.length - 1].message}}
+                                </span>
+                            </div>
+                            <div class="last-time h-100">
+                                xxx
+                            </div>
+                        </li>
+                    </transition-group>
+                </div>
+                <div class="right-window col-8 h-100">
+                    <div class="section-header active-profile d-flex justify-content-center align-items-center">
+                        <div class="active-pic" :style="getBgImage"></div>
+                        <div class="active-infos">
+                            <p class="m-0 fw-bolder">{{getContactName}}</p>
+                            <span>Ultimo accesso ...</span>
+                        </div>
+                        <div class="active-icons d-flex justify-content-between align-items-center fs-4">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <i class="fa-solid fa-paperclip"></i>
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </div>
+                    </div>
+                    <div class="active-chat">
+                        <div v-for="(cont, indexC) in contacts" :key="cont.id" class="contact-window">
+                            <transition-group v-if="cont.id == activeContact" name="messagesFX" tag="ul" class="message-list">
+                                <li v-for="(msg, indexM) in cont.messages" :key="msg.id" class="message d-flex">
+                                    <div :class="msg.status" class="h-100 d-flex align-items-center position-relative">
+                                        {{msg.message}}
+                                        <span class="sent-time position-absolute gg-fs-smaller">xxx</span>
+                                    </div>
+                                </li>
+                            </transition-group>
+                        </div>
+                    </div>
+                    <div class="send-message"></div>
+                </div>
             </div>
         </div>
     </div>
