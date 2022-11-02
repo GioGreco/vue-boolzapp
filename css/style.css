@@ -1,0 +1,29 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --green-top: #009688; 
+    --green-message: #d5f9ba; 
+    --grey-frame: #eaeaea; 
+    --grey-bg: #dbdbd3; 
+    --lightblue-panel: #8edafc; 
+    --grey-selected: #e9ebeb; 
+    --grey-icons-message: #6b7376; 
+    --grey-icons-frame: #bbbab8; 
+}
+
+body{
+    height: 100vh;
+}
+
+.bg-wrapper{
+    background-image: linear-gradient(180deg, var(--green-top) 15%, var(--grey-bg) 15%);
+}
+
+#main-window{
+    width: 80%;
+    height: 95%;
+}
