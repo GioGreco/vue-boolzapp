@@ -196,6 +196,31 @@ body{
     color: var(--grey-icons-frame)
 }
 
+.right-window .active-profile .chat-options:hover{
+    color: var(--grey-icons-message);
+    cursor: pointer;
+}
+
+.right-window .active-profile .chat-opt-box{
+    background-color: var(--grey-frame);
+    top: 100%;
+    right: 0px;
+    padding: 10px;
+    font-size: 12px;
+    z-index: 500;
+}
+
+.right-window .active-profile .chat-opt-box span{
+    width: max-content;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.right-window .active-profile .chat-opt-box span:hover{
+    background-color: var(--grey-bg);
+    color: black;
+}
+
 .right-window .active-chat{
     height: calc(100% - 140px);
     background-image: url("../img/mine.jpg");

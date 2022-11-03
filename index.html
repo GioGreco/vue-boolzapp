@@ -61,17 +61,21 @@
                     </transition-group>
                 </div>
                 <div class="right-window col-8 h-100">
-                    <div v-if="activeContact != 0" class="section-header active-profile d-flex justify-content-center align-items-center">
+                    <div v-if="activeContact != 0" class="section-header active-profile d-flex justify-content-center align-items-center position-relative">
                         <div class="active-pic" :style="getBgImage"></div>
                         <div class="active-infos">
                             <p class="m-0 fw-bolder">{{getContactName}}</p>
                             <span v-if="!isTyping">Ultimo accesso {{contacts[activeContact - 1].messages.length > 0? parsedDate(contacts[activeContact - 1].messages[contacts[activeContact - 1].messages.length - 1].date) : '---'}}</span>
                             <span v-else>Sta scrivendo...</span>
                         </div>
-                        <div class="active-icons d-flex justify-content-between align-items-center fs-4">
+                        <div class="active-icons d-flex justify-content-between align-items-center fs-4 position-relative">
                             <i class="fa-solid fa-magnifying-glass"></i>
                             <i class="fa-solid fa-paperclip"></i>
-                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                            <i @click="contacts[activeContact - 1].showChatOptions = !contacts[activeContact - 1].showChatOptions" class="chat-options fa-solid fa-ellipsis-vertical"></i>
+                        </div>
+                        <div v-if="contacts[activeContact -1].showChatOptions" class="chat-opt-box position-absolute d-flex flex-column">
+                            <span @click="contacts[activeContact - 1].messages = ''" class="my-2">Elimina tutti i messaggi</span>
+                            <span @click="deleteChat" class="my-2">Elimina chat</span>
                         </div>
                     </div>
                     <div v-if="activeContact != 0" class="active-chat">

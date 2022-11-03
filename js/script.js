@@ -13,7 +13,8 @@ const app = createApp({
             isTyping: false,
             notificationPanel: false,
             contacts: [
-                {
+                {   
+                    showChatOptions: false,
                     id: 1,
                     name: 'Michele',
                     avatar: './img/avatar_1.jpg',
@@ -40,6 +41,7 @@ const app = createApp({
                     ]
                 },
                 {
+                    showChatOptions: false,
                     id: 2,
                     name: 'Fabio',
                     avatar: './img/avatar_2.jpg',
@@ -66,6 +68,7 @@ const app = createApp({
                     ]
                 },
                 {
+                    showChatOptions: false,
                     id: 3,
                     name: 'Samuele',
                     avatar: './img/avatar_3.jpg',
@@ -92,6 +95,7 @@ const app = createApp({
                     ]
                 },
                 {
+                    showChatOptions: false,
                     id: 4,
                     name: 'Alessandro B.',
                     avatar: './img/avatar_4.jpg',
@@ -112,6 +116,7 @@ const app = createApp({
                     ]
                 },
                 {
+                    showChatOptions: false,
                     id: 5,
                     name: 'Alessandro L.',
                     avatar: './img/avatar_5.jpg',
@@ -132,6 +137,7 @@ const app = createApp({
                     ]
                 },
                 {
+                    showChatOptions: false,
                     id: 6,
                     name: 'Claudia',
                     avatar: './img/avatar_6.jpg',
@@ -158,6 +164,7 @@ const app = createApp({
                     ]
                 },
                 {
+                    showChatOptions: false,
                     id: 7,
                     name: 'Federico',
                     avatar: './img/avatar_7.jpg',
@@ -178,6 +185,7 @@ const app = createApp({
                     ]
                 },
                 {
+                    showChatOptions: false,
                     id: 8,
                     name: 'Davide',
                     avatar: './img/avatar_8.jpg',
@@ -229,6 +237,11 @@ const app = createApp({
             this.newMessage.date = '';
             this.newMessage.status = '';
 
+            // Vue.nextTick(() => {
+            //     const chatBox = document.querySelector('.contact-window');
+            //     chatBox.scrollTo(0, chatBox.scrollHeight)
+            // });
+
             setTimeout(() => {
                     this.newMessage.id = randomBetween(9, 1000000);
                     this.newMessage.showOptions = false,
@@ -274,6 +287,12 @@ const app = createApp({
         }
     },
     mounted(){
+    },
+    updated(){
+        Vue.nextTick(() => {
+            const chatBox = document.querySelector('.active-chat');
+            chatBox.scrollTo(0, chatBox.scrollHeight)
+        });
     }
 });
 
