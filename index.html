@@ -41,7 +41,7 @@
                         <i class="fa-solid fa-magnifying-glass"></i>
                         <input v-model="searchContacts" type="text">
                     </div>
-                    <transition-group name="chatsFX" tag="ul" class="chats p-0">
+                    <transition-group name="chatsFX" tag="ul" class="chats p-0 m-0" :class="{fullHeight: notificationPanel}">
                         <li @click="activeContact = item.id" v-for="(item, index) in filterContacts" :key="item.id" :class="(activeContact == item.id)? 'active' : '' " class="contact d-flex justify-content-between align-items-center position-relative">
                             <div class="contact-pic">
                                 <img :src="item.avatar" :alt='item.name' class="h-100 w-100">
@@ -65,7 +65,8 @@
                         <div class="active-pic" :style="getBgImage"></div>
                         <div class="active-infos">
                             <p class="m-0 fw-bolder">{{getContactName}}</p>
-                            <span>Ultimo accesso {{contacts[activeContact - 1].messages.length > 0? parsedDate(contacts[activeContact - 1].messages[contacts[activeContact - 1].messages.length - 1].date) : '---'}}</span>
+                            <span v-if="!isTyping">Ultimo accesso {{contacts[activeContact - 1].messages.length > 0? parsedDate(contacts[activeContact - 1].messages[contacts[activeContact - 1].messages.length - 1].date) : '---'}}</span>
+                            <span v-else>Sta scrivendo...</span>
                         </div>
                         <div class="active-icons d-flex justify-content-between align-items-center fs-4">
                             <i class="fa-solid fa-magnifying-glass"></i>

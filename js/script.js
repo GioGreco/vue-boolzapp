@@ -10,6 +10,7 @@ const app = createApp({
             searchContacts: '',
             activeContact: 1,
             active: false,
+            isTyping: false,
             notificationPanel: false,
             contacts: [
                 {
@@ -215,6 +216,7 @@ const app = createApp({
     methods: {
         sendMessage(){
             if(this.newMessage.message.length > 0){
+                this.isTyping = true;
                 this.newMessage.id = randomBetween(9, 1000000);
                 this.newMessage.showOptions = false,
                 this.newMessage.status = 'sent';
@@ -239,6 +241,7 @@ const app = createApp({
                     this.newMessage.message = '';
                     this.newMessage.date = '';
                     this.newMessage.status = '';
+                    this.isTyping = false;
             }, 2000)
         },
         showOptions(mex){
@@ -252,13 +255,8 @@ const app = createApp({
             console.log(contact);
         },
         parsedDate(d){
-            if(d){
-                let parsed = dt.fromFormat(d, 'dd/LL/yyyy hh:mm:ss').toFormat('MMMM dd yyyy, HH:mm');
+            let parsed = dt.fromFormat(d, 'dd/LL/yyyy hh:mm:ss').toFormat('MMMM dd yyyy, HH:mm');
             return parsed;
-            }
-            else{
-                return '---';
-            }
         }
     },
     computed: {
