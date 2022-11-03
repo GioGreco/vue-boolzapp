@@ -149,7 +149,7 @@ body{
 }
 
 .contact .contact-preview{
-    width: calc(100% - 90px);
+    width: calc(100% - 55px);
     padding: 0 18px;
 }
 
@@ -162,7 +162,9 @@ body{
 }
 
 .contact .last-time{
-    width: 35px;
+    top: 5px;
+    right: 5px;
+    font-size: 10px;
 }
 /* RIGHT-SECTION */
 .right-window{
@@ -237,8 +239,9 @@ body{
 }
 
 .message-list .message .sent-time{
-    bottom: 5px;
-    right: 5px;
+    bottom: 3px;
+    right: 3px;
+    font-size: 10px;
     color: var(--grey-icons-frame);
 }
 

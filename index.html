@@ -8,8 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/3.1.0/luxon.min.js" integrity="sha512-79nhbkASdW5wurW8DtF9Vd7BEDKdTbCKkh87lW6W3tk9T4L9Bc58MzmvRzjMcFCSKpjkoRjwzrTdfOa5lkfJ5Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js" integrity="sha512-CryKbMe7sjSCDPl18jtJI5DR5jtkUWxPXWaLCst6QjH8wxDexfRJic2WRmRXmstr2Y8SxDDWuBO6CQC6IE4KTA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/3.1.0/luxon.min.js" integrity="sha512-79nhbkASdW5wurW8DtF9Vd7BEDKdTbCKkh87lW6W3tk9T4L9Bc58MzmvRzjMcFCSKpjkoRjwzrTdfOa5lkfJ5Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="./css/style.css">
     <script type="text/javascript" src="./js/myFunctions.js"></script>
 </head>
@@ -43,7 +42,7 @@
                         <input v-model="searchContacts" type="text">
                     </div>
                     <transition-group name="chatsFX" tag="ul" class="chats p-0">
-                        <li @click="activeContact = item.id" v-for="(item, index) in filterContacts" :key="item.id" :class="(activeContact == item.id)? 'active' : '' " class="contact d-flex justify-content-between align-items-center">
+                        <li @click="activeContact = item.id" v-for="(item, index) in filterContacts" :key="item.id" :class="(activeContact == item.id)? 'active' : '' " class="contact d-flex justify-content-between align-items-center position-relative">
                             <div class="contact-pic">
                                 <img :src="item.avatar" :alt='item.name' class="h-100 w-100">
                             </div>
@@ -52,11 +51,11 @@
                                     {{item.name}}
                                 </p>
                                 <span class="last-message gg-fs-smaller">
-                                    {{item.messages[item.messages.length - 1].message}}
+                                    {{item.messages.length > 0? item.messages[item.messages.length - 1].message : ''}}
                                 </span>
                             </div>
-                            <div class="last-time h-100">
-                                xxx
+                            <div class="last-time h-100 position-absolute">
+                                {{item.messages.length > 0? parsedDate(item.messages[item.messages.length - 1].date) : ''}}
                             </div>
                         </li>
                     </transition-group>
@@ -66,7 +65,7 @@
                         <div class="active-pic" :style="getBgImage"></div>
                         <div class="active-infos">
                             <p class="m-0 fw-bolder">{{getContactName}}</p>
-                            <span>Ultimo accesso ...</span>
+                            <span>Ultimo accesso {{contacts[activeContact - 1].messages.length > 0? parsedDate(contacts[activeContact - 1].messages[contacts[activeContact - 1].messages.length - 1].date) : '---'}}</span>
                         </div>
                         <div class="active-icons d-flex justify-content-between align-items-center fs-4">
                             <i class="fa-solid fa-magnifying-glass"></i>
@@ -80,7 +79,7 @@
                                 <li v-for="(msg, indexM) in cont.messages" :key="indexM" class="message d-flex">
                                     <div :class="msg.status" class="h-100 d-flex align-items-center position-relative">
                                         {{msg.message}}
-                                        <span class="sent-time position-absolute gg-fs-smaller">{{msg.date}}</span>
+                                        <span class="sent-time position-absolute">{{parsedDate(msg.date)}}</span>
                                         <span class="msg-options position-absolute"><i @click="msg.showOptions = !msg.showOptions" class="fa-solid fa-angle-down position-relative"></i></span>
                                         <div v-if="msg.showOptions" class="option-box d-flex flex-column position-absolute">
                                             <span @click="removeMessage(cont, indexM)" class="my-2">Elimina messaggio</span>

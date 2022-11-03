@@ -1,8 +1,7 @@
 "use strict";
 
 const { createApp } = Vue;
-
-// import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+const dt = luxon.DateTime;
 
 const app = createApp({
     data(){
@@ -22,7 +21,7 @@ const app = createApp({
                         {
                             showOptions: false,
                             date: '10/01/2020 15:30:55',
-                            message: 'Hai portato a spasso il cane? cdcjhsbdcbdsckjbdscjbdscnsdlckndsclkndslcknsdclkndsclksdncldsncldskncldsknclsdkcnlsdkc',
+                            message: 'Hai portato a spasso il cane?',
                             status: 'sent'
                         },
                         {   
@@ -219,7 +218,8 @@ const app = createApp({
                 this.newMessage.id = randomBetween(9, 1000000);
                 this.newMessage.showOptions = false,
                 this.newMessage.status = 'sent';
-                this.newMessage.date = new Date().getMinutes();
+                let newDate = dt.now();
+                this.newMessage.date = newDate.toFormat('dd/LL/yyyy hh:mm:ss');
                 this.contacts[this.activeContact - 1].messages.push({...this.newMessage});
             }
             this.newMessage.id = '';
@@ -231,7 +231,8 @@ const app = createApp({
                     this.newMessage.id = randomBetween(9, 1000000);
                     this.newMessage.showOptions = false,
                     this.newMessage.status = 'received';
-                    this.newMessage.date = new Date().getMinutes();
+                    let newDate = dt.now();
+                    this.newMessage.date = newDate.toFormat('dd/LL/yyyy hh:mm:ss');
                     this.newMessage.message = this.answers[randomBetween(0, this.answers.length - 1)];
                     this.contacts[this.activeContact - 1].messages.push({...this.newMessage});
                     this.newMessage.id = '';
@@ -248,6 +249,16 @@ const app = createApp({
         },
         removeMessage(contact, message){
             contact.messages.splice(message, 1);
+            console.log(contact);
+        },
+        parsedDate(d){
+            if(d){
+                let parsed = dt.fromFormat(d, 'dd/LL/yyyy hh:mm:ss').toFormat('MMMM dd yyyy, HH:mm');
+            return parsed;
+            }
+            else{
+                return '---';
+            }
         }
     },
     computed: {
@@ -265,7 +276,6 @@ const app = createApp({
         }
     },
     mounted(){
-       
     }
 });
 
