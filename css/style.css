@@ -64,6 +64,11 @@ body{
     border-radius: 50%;
     background-image: url('../img/avatar_io.jpg');
     background-size: cover;
+    margin-right: 10px;
+}
+
+.left-window .my-profile .my-name{
+    width: calc(100% - 155px);
 }
 
 .left-window .my-profile .my-profile-icons{
@@ -89,13 +94,38 @@ body{
     margin-right: 10px;
 }
 
+.left-window .notify-panel .hide-panel{
+    top: 50%;
+    right: 10px;
+    transform: translate(0, -50%);
+    color: var(--grey-icons-frame);
+}
+
+.left-window .notify-panel .hide-panel:hover{
+    color: white;
+    cursor: pointer;
+}
+
 .left-window .search-chats{
     height: 50px;
     background-color: var(--grey-frame);
+    color: grey;
 }
 
 .left-window .search-chats input{
-    width: 95%;
+    width: 85%;
+    height: 40px;
+    border: none;
+    outline: none;
+}
+
+.left-window .search-chats i{
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    line-height: 40px;
+    background-color: white;
+
 }
 
 .left-window .chats{
@@ -163,6 +193,7 @@ body{
 .right-window .active-chat{
     height: calc(100% - 140px);
     background-image: url("../img/mine.jpg");
+    background-repeat: repeat;
     overflow-y: auto;
 }
 
@@ -182,7 +213,7 @@ body{
     min-width: 300px;
     max-width: 450px;
     background-color: var(--green-message);
-    padding: 15px 12px;
+    padding: 15px 40px 15px 12px;;
     border-radius: 10px;
     word-break: break-all;
 }
@@ -192,7 +223,7 @@ body{
     min-width: 300px;
     max-width: 450px;
     background-color: white;
-    padding: 15px 12px;
+    padding: 15px 40px 15px 12px;
     border-radius: 10px;
     word-break: break-all;
 }
@@ -203,7 +234,62 @@ body{
     color: var(--grey-icons-frame);
 }
 
+.message-list .message .msg-options{
+    right: 10px;
+    height: 40px;
+    line-height: 40px;
+    cursor: pointer;
+}
+
+.message-list .message .msg-options:hover{
+    color: var(--grey-icons-frame);
+}
+
+.message-list .message .msg-options:hover .option-box{
+    color: black;
+}
+
+.message-list .message .msg-options .option-box{
+    background-color: var(--grey-frame);
+    right: 1em;
+    padding: 10px;
+    font-size: 12px;
+    z-index: 500;
+}
+
+.message-list .message .msg-options .option-box span{
+    width: max-content;
+    padding: 10px;
+}
+
+.message-list .message .msg-options .option-box span:hover{
+    background-color: var(--grey-bg);
+    color: black;
+}
+
 .right-window .send-message{
     height: 70px;
     background-color: var(--grey-frame);
+    padding: 5px 20px;
+    color: var(--grey-icons-message);
+}
+
+.right-window .send-message input{
+    width: 85%;
+    height: 85%;
+    border: none;
+    padding: 15px;
+    font-size: 1.2rem;
+    color: grey;
+    border-radius: 5px;
+}
+
+.right-window .send-message i:first-of-type:hover{
+    color: var(--grey-icons-frame);
+    cursor: pointer;
+}
+
+.right-window .send-message i:last-of-type:hover{
+    color: var(--green-top);
+    cursor: pointer;
 }

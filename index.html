@@ -19,13 +19,14 @@
                 <div class="left-window col-4 h-100">
                     <div class="section-header my-profile d-flex justify-content-between align-items-center">
                         <div class="my-pic"></div>
+                        <p class="my-name fw-bolder m-0">Sofia</p>
                         <div class="my-profile-icons d-flex justify-content-between fs-5">
                             <i class="fa-solid fa-circle-notch"></i>
                             <i class="fa-solid fa-message"></i>
                             <i class="fa-solid fa-ellipsis-vertical"></i>
                         </div>
                     </div>
-                    <div class="notify-panel d-flex justify-content-start align-items-center">
+                    <div v-if="!notificationPanel" class="notify-panel d-flex justify-content-start align-items-center position-relative">
                         <div class="notification-icon">
                             <i class="fa-solid fa-bell-slash"></i>
                         </div>
@@ -33,12 +34,14 @@
                             <p class="m-0 fw-bolder">Ricevi notifiche di nuovi messaggi</p>
                             <span class="text-decoration-underline">Attiva notifiche desktop</span>
                         </div>
+                        <span @click="notificationPanel = true" class="hide-panel position-absolute fs-5"><i class="fa-solid fa-xmark"></i></span>
                     </div>
                     <div class="search-chats d-flex justify-content-center align-items-center">
-                        <input type="text">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input v-model="searchContacts" type="text">
                     </div>
                     <transition-group name="chatsFX" tag="ul" class="chats p-0">
-                        <li @click="activeContact = item.id" v-for="(item, index) in contacts" :key="item.id" :class="(activeContact == item.id)? 'active' : '' " class="contact d-flex justify-content-between align-items-center">
+                        <li @click="activeContact = item.id" v-for="(item, index) in filterContacts" :key="item.id" :class="(activeContact == item.id)? 'active' : '' " class="contact d-flex justify-content-between align-items-center">
                             <div class="contact-pic">
                                 <img :src="item.avatar" :alt='item.name' class="h-100 w-100">
                             </div>
@@ -73,15 +76,26 @@
                         <div v-for="(cont, indexC) in contacts" :key="cont.id" class="contact-window">
                             <transition-group v-if="cont.id == activeContact" name="messagesFX" tag="ul" class="message-list">
                                 <li v-for="(msg, indexM) in cont.messages" :key="msg.id" class="message d-flex">
-                                    <div :class="msg.status" class="h-100 d-flex align-items-center position-relative">
+                                    <div @mouseover="showOptions(msg)" @mouseleave="hideOptions(msg)" :class="msg.status" class="h-100 d-flex align-items-center position-relative">
                                         {{msg.message}}
-                                        <span class="sent-time position-absolute gg-fs-smaller">xxx</span>
+                                        <span v-if="!msg.showOptions" class="sent-time position-absolute gg-fs-smaller">{{msg.date}}</span>
+                                        <span v-if="msg.showOptions" class="msg-options position-absolute"><i class="fa-solid fa-angle-down position-relative">
+                                            <div class="option-box d-flex flex-column position-absolute">
+                                                <span class="my-2">Elimina messaggio</span>
+                                                <span class="my-2">Info messaggio</span>
+                                            </div>
+                                        </i></span>
                                     </div>
                                 </li>
                             </transition-group>
                         </div>
                     </div>
-                    <div class="send-message"></div>
+                    <div class="send-message d-flex justify-content-between align-items-center">
+                        <i class="fa-regular fa-face-smile fs-4"></i>
+                        <input v-model="newMessage.message" @keyup.enter="sendMessage" type="text" placeholder="Scrivi un messaggio">
+                        <i v-if="newMessage.message == ''" class="fa-solid fa-microphone fs-4"></i>
+                        <i v-else @click="sendMessage" class="fa-solid fa-circle-right fs-4"></i>
+                    </div>
                 </div>
             </div>
         </div>
