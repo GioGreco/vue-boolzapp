@@ -61,7 +61,7 @@
                     </transition-group>
                 </div>
                 <div class="right-window col-8 h-100">
-                    <div class="section-header active-profile d-flex justify-content-center align-items-center">
+                    <div v-if="activeContact != 0" class="section-header active-profile d-flex justify-content-center align-items-center">
                         <div class="active-pic" :style="getBgImage"></div>
                         <div class="active-infos">
                             <p class="m-0 fw-bolder">{{getContactName}}</p>
@@ -74,7 +74,7 @@
                             <i class="fa-solid fa-ellipsis-vertical"></i>
                         </div>
                     </div>
-                    <div class="active-chat">
+                    <div v-if="activeContact != 0" class="active-chat">
                         <div v-for="(cont, indexC) in contacts" :key="cont.id" class="contact-window">
                             <transition-group v-if="cont.id == activeContact" name="messagesFX" tag="ul" class="message-list">
                                 <li v-for="(msg, indexM) in cont.messages" :key="indexM" class="message d-flex">
@@ -91,7 +91,15 @@
                             </transition-group>
                         </div>
                     </div>
-                    <div class="send-message d-flex justify-content-between align-items-center">
+                    <div v-else class="welcome h-100 d-flex flex-column align-items-center justify-content-center text-center position-relative">
+                        <h3>Boolzapp</h3>
+                        <span>Invia e ricevi messaggi senza limiti. Usa Boolzapp su un massimo di 4 dispositivi collegati e 1 telefono contemporaneamente.</span>
+                        <span class="position-absolute bottom-0 mb-5">
+                            <i class="fa-solid fa-lock"></i>
+                            con crittografia end-to-end
+                        </span>
+                    </div>
+                    <div v-if="activeContact != 0" class="send-message d-flex justify-content-between align-items-center">
                         <i class="fa-regular fa-face-smile fs-4"></i>
                         <input v-model="newMessage.message" @keyup.enter="sendMessage" type="text" placeholder="Scrivi un messaggio">
                         <i v-if="newMessage.message == ''" class="fa-solid fa-microphone fs-4"></i>

@@ -311,3 +311,7 @@ body{
     color: var(--green-top);
     cursor: pointer;
 }
+
+.right-window .welcome{
+    background-color: var(--grey-frame);
+}

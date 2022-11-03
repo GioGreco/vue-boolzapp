@@ -8,7 +8,7 @@ const app = createApp({
         return{
             testDate: '10/01/2020 15:30:55',
             searchContacts: '',
-            activeContact: 1,
+            activeContact: 0,
             active: false,
             isTyping: false,
             notificationPanel: false,
