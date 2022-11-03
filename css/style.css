@@ -208,6 +208,14 @@ body{
     margin: 10px 0;
 }
 
+.message-list .message div:hover .msg-options{
+    opacity: 1;
+}
+
+.message-list .message div:hover .sent-time{
+    opacity: 0;
+}
+
 .message-list .message .sent{
     align-self: flex-end;
     min-width: 300px;
@@ -239,6 +247,7 @@ body{
     height: 40px;
     line-height: 40px;
     cursor: pointer;
+    opacity: 0;
 }
 
 .message-list .message .msg-options:hover{
@@ -249,20 +258,22 @@ body{
     color: black;
 }
 
-.message-list .message .msg-options .option-box{
+.message-list .message .option-box{
     background-color: var(--grey-frame);
-    right: 1em;
+    top: 65%;
+    right: 10px;
     padding: 10px;
     font-size: 12px;
     z-index: 500;
 }
 
-.message-list .message .msg-options .option-box span{
+.message-list .message .option-box span{
     width: max-content;
     padding: 10px;
+    cursor: pointer;
 }
 
-.message-list .message .msg-options .option-box span:hover{
+.message-list .message .option-box span:hover{
     background-color: var(--grey-bg);
     color: black;
 }
