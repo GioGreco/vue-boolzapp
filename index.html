@@ -10,24 +10,25 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/3.1.0/luxon.min.js" integrity="sha512-79nhbkASdW5wurW8DtF9Vd7BEDKdTbCKkh87lW6W3tk9T4L9Bc58MzmvRzjMcFCSKpjkoRjwzrTdfOa5lkfJ5Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/mediaquery.css">
     <script type="text/javascript" src="./js/myFunctions.js"></script>
 </head>
 <body> 
 
     <div id="app" class="h-100 w-100">
-        <div class="bg-wrapper h-100 w-100 d-flex justify-content-center align-items-center">
+        <div v-if="splash" class="bg-wrapper h-100 w-100 d-flex justify-content-center align-items-center">
             <div id="main-window" class="bg-black row g-0">
                 <div class="left-window col-4 h-100">
-                    <div class="section-header my-profile d-flex justify-content-between align-items-center">
+                    <div class="section-header my-profile d-flex justify-content-start align-items-center">
                         <div class="my-pic"></div>
                         <p class="my-name fw-bolder m-0">Sofia</p>
-                        <div class="my-profile-icons d-flex justify-content-between fs-5">
+                        <div class="my-profile-icons d-flex justify-content-between">
                             <i class="fa-solid fa-circle-notch"></i>
                             <i class="fa-solid fa-message"></i>
                             <i class="fa-solid fa-ellipsis-vertical"></i>
                         </div>
                     </div>
-                    <div v-if="!notificationPanel" class="notify-panel d-flex justify-content-start align-items-center position-relative">
+                    <div v-if="!notificationPanel" class="notify-panel justify-content-start align-items-center position-relative">
                         <div class="notification-icon">
                             <i class="fa-solid fa-bell-slash"></i>
                         </div>
@@ -74,8 +75,8 @@
                             <i @click="contacts[activeContact - 1].showChatOptions = !contacts[activeContact - 1].showChatOptions" class="chat-options fa-solid fa-ellipsis-vertical"></i>
                         </div>
                         <div v-if="contacts[activeContact -1].showChatOptions" class="chat-opt-box position-absolute d-flex flex-column">
-                            <span @click="contacts[activeContact - 1].messages = ''" class="my-2">Elimina tutti i messaggi</span>
-                            <span @click="deleteChat" class="my-2">Elimina chat</span>
+                            <span @click="contacts[activeContact - 1].messages = []" class="my-2">Elimina tutti i messaggi</span>
+                            <span class="my-2">Elimina chat</span>
                         </div>
                     </div>
                     <div v-if="activeContact != 0" class="active-chat">
@@ -110,6 +111,14 @@
                         <i v-else @click="sendMessage" class="fa-solid fa-circle-right fs-4"></i>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div v-else class="splash-page h-100 d-flex flex-column justify-content-center align-items-center">
+            <h1>Boolzapp</h1>
+            <div class="loading-app">
+                <transition name="load">
+                    <div v-if="startLoad" class="h-100"></div>
+                </transition>  
             </div>
         </div>
     </div>

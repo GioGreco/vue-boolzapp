@@ -6,12 +6,13 @@ const dt = luxon.DateTime;
 const app = createApp({
     data(){
         return{
-            testDate: '10/01/2020 15:30:55',
             searchContacts: '',
             activeContact: 0,
             active: false,
             isTyping: false,
             notificationPanel: false,
+            splash: false,
+            startLoad: false,
             contacts: [
                 {   
                     showChatOptions: false,
@@ -284,9 +285,14 @@ const app = createApp({
                 return contact.name.toLowerCase().includes(this.searchContacts.toLowerCase());
             })
             return filteredList;
-        }
+        },
     },
     mounted(){
+        this.startLoad = true;
+        setTimeout(() => {
+            this.splash = true;
+            this.startLoad = false;
+        }, 3000)
     },
     updated(){
         Vue.nextTick(() => {

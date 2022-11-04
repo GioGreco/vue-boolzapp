@@ -55,7 +55,8 @@ body{
 }
 
 .left-window .my-profile{
-    padding: 10px
+    padding: 10px;
+    width: 100%;
 }
 
 .left-window .my-profile .my-pic{
@@ -72,17 +73,21 @@ body{
 }
 
 .left-window .my-profile .my-profile-icons{
+    font-size: 20px;
     width: 90px;
     color: var(--grey-icons-frame)
 }
 
 .left-window .notify-panel{
+    display: flex;
     padding: 0 15px;
     height: 80px;
     background-color: var(--lightblue-panel);
+    font-size: 14px;
 }
 
 .left-window .notify-panel .notification-icon{
+    flex-shrink: 0;
     height: 55px;
     width: 55px;
     background-color: white;
@@ -189,6 +194,13 @@ body{
 
 .right-window .active-profile .active-infos{
     width: calc(100% - 155px);
+    overflow: hidden;
+}
+
+.right-window .active-profile .active-infos > *{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .right-window .active-profile .active-icons{
@@ -249,8 +261,8 @@ body{
 
 .message-list .message .sent{
     align-self: flex-end;
-    min-width: 300px;
-    max-width: 450px;
+    min-width: 250px;
+    max-width: 375px;
     background-color: var(--green-message);
     padding: 15px 40px 15px 12px;;
     border-radius: 10px;
@@ -259,8 +271,8 @@ body{
 
 .message-list .message .received{
     align-self: flex-start;
-    min-width: 300px;
-    max-width: 450px;
+    min-width: 250px;
+    max-width: 375px;
     background-color: white;
     padding: 15px 40px 15px 12px;
     border-radius: 10px;
@@ -325,6 +337,7 @@ body{
     font-size: 1.2rem;
     color: grey;
     border-radius: 5px;
+    outline: none;
 }
 
 .right-window .send-message i:first-of-type:hover{
@@ -339,4 +352,52 @@ body{
 
 .right-window .welcome{
     background-color: var(--grey-frame);
+}
+
+/* SPLASH PAGE */
+
+.splash-page{
+    background-color: var(--grey-frame);
+}
+
+.loading-app{
+    width: 50%;
+    height: 5px;
+    background-color: var(--grey-icons-message);
+    border-radius: 5px;
+}
+
+.load-enter-from{
+    width: 0%;
+    background-color: var(--green-top);
+}
+
+.load-enter-to{
+    width: 100%;
+    background-color: var(--green-top);
+}
+
+.load-enter-active{
+    animation: gradualWidth 3s forwards;
+}
+
+@keyframes gradualWidth {
+    0%{
+        width: 0%;
+    }
+    30%{
+        width: 45%;
+    }
+    50%{
+        width: 55%;
+    }
+    70%{
+        width: 65%;
+    }
+    90%{
+        width: 90%;
+    }
+    100%{
+        width: 100%;
+    }
 }
