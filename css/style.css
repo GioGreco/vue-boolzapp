@@ -246,6 +246,7 @@ body{
     background-image: url("../img/mine.jpg");
     background-repeat: repeat;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .right-window .message-list{
@@ -402,6 +403,42 @@ body{
     border-radius: 5px;
 }
 
+
+/* TRANSITIONS/ANIMATIONS */
+
+/* messages */
+.messagesFX-enter-from{
+    transform: scale(1.4);
+}
+
+.messagesFX-enter-to{
+    transform: scale(1);
+}
+
+.messagesFX-enter-active{
+    transition: transform .5s ease-in-out;
+}
+
+.messagesFX-leave-from{
+    width: calc(100% - 160px);
+    transform: scale(1);
+}
+
+.messagesFX-leave-to{
+    width: calc(100% - 160px);
+    transform: scale(.2);
+}
+
+.messagesFX-leave-active{
+    transition: transform .5s ease-in-out;
+    position: absolute;
+}
+
+.messagesFX-move{
+    transition: transform .5s ease-in-out;
+}
+
+/* splash page loading */
 .load-enter-from{
     width: 0%;
     background-color: var(--green-top);
