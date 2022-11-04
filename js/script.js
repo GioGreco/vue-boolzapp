@@ -6,13 +6,61 @@ const dt = luxon.DateTime;
 const app = createApp({
     data(){
         return{
+            icons:[
+                '&#128512;',
+                '&#128513;',
+                '&#128514;',
+                '&#128515;',
+                '&#128516;',
+                '&#128517;',
+                '&#128518;',
+                '&#128519;',
+                '&#128521;',
+                '&#128522;',
+                '&#128523;',
+                '&#128524;',
+                '&#128525;',
+                '&#128526;',
+                '&#128528;',
+                '&#128529;',
+                '&#128530;',
+                '&#128536;',
+                '&#128545;',
+                '&#128548;',
+                '&#128561;',
+                '&#129315;',
+                '&#129299;',
+                '&#129319;',
+                '&#129321;',
+                '&#129325;',
+                '&#129488;',
+                '&#9996;',
+                '&#9995;',
+                '&#10024;',
+                '&#10062;',
+                '&#128064;',
+                '&#128077;',
+                '&#128079;',
+                '&#128152;',
+                '&#128149;',
+                '&#128156;',
+                '&#128158;',
+                '&#128584;',
+                '&#129310;',
+                '&#129505;',
+                '&#127802;',
+                '&#127801;',
+                '&#9749;'
+              ],
             searchContacts: '',
             activeContact: 0,
             active: false,
             isTyping: false,
             notificationPanel: false,
+            showChat: false,
             splash: false,
             startLoad: false,
+            showEmoji: false,
             contacts: [
                 {   
                     showChatOptions: false,
@@ -271,6 +319,9 @@ const app = createApp({
         parsedDate(d){
             let parsed = dt.fromFormat(d, 'dd/LL/yyyy hh:mm:ss').toFormat('MMMM dd yyyy, HH:mm');
             return parsed;
+        },
+        addEmoji(emoji){
+            this.newMessage.message += this.icons[emoji];
         }
     },
     computed: {

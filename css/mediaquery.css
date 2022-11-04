@@ -13,10 +13,6 @@
         max-width: 225px;
     }
 
-    .left-window .notify-panel{
-        display: none;
-    }
-
     .left-window .my-profile .my-profile-icons{
         width: max-content;
         height: 100%;
@@ -33,17 +29,23 @@
 
 @media screen and (max-width: 768px){
     .left-window .notify-panel{
-        font-size: 11px;
+        font-size: 14px;
     }
 
     .message-list .message .sent{
-        min-width: 100px;
-        max-width: 150px;
+        min-width: 250px;
+        max-width: 375px;
     }
 
     .message-list .message .received{
-        min-width: 100px;
-        max-width: 150px;
+        min-width: 250px;
+        max-width: 375px;
+    }
+
+    .left-window .my-profile .my-profile-icons{
+        font-size: 20px;
+        width: 90px;
+        flex-direction: row;
     }
 
     .right-window .active-profile .active-infos span{
@@ -51,15 +53,5 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-    }
-
-    .contact .last-time{
-        display: none;
-    }
-}
-
-@media screen and (max-width: 576px){
-    .contact .last-time{
-        display: block;
     }
 }
